@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bitcode.a10_04_2024_webservicesversion2.databinding.UserViewBinding
+import com.bumptech.glide.Glide
 
 class UsersAdapter(private val users : ArrayList<User>) :
 RecyclerView.Adapter<UsersAdapter.UserViewHolder>(){
@@ -25,6 +26,12 @@ RecyclerView.Adapter<UsersAdapter.UserViewHolder>(){
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
 
         holder.userViewBinding.user = users[position]
+        Glide.with(holder.itemView)
+            .load(users[position].avatar)
+            .centerCrop()
+            .placeholder(R.drawable.ic_launcher_background)
+            .error(R.mipmap.ic_launcher)
+            .into(holder.userViewBinding.imgUser)
     }
 
     override fun getItemCount(): Int {
